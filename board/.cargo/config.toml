@@ -1,0 +1,10 @@
+# This configuration tells the Rust compiler to pass specific flags to the linker when building for ARM microcontrollers.
+# The "-C" flag tells the compiler to pass a custom flag to the linker.
+# The -Tlink.x flag tells the linker to use the link.x script (provided by the `cortex-m-rt` crate) along with the memory.x file to
+# properly lay out the program in the microcontroller's memory.
+# The cfg attribute ensures that these flags are only passed when building for ARM microcontrollers.
+
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+rustflags = [
+  "-C", "link-arg=-Tlink.x",
+]
